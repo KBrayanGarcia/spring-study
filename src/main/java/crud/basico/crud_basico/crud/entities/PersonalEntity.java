@@ -1,15 +1,52 @@
 package crud.basico.crud_basico.crud.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class PersonalEntity {
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getPrimerApellido() {
+        return primerApellido;
+    }
+
+    public void setPrimerApellido(String primerApellido) {
+        this.primerApellido = primerApellido;
+    }
+
+    public String getSegundoApellido() {
+        return segundoApellido;
+    }
+
+    public void setSegundoApellido(String segundoApellido) {
+        this.segundoApellido = segundoApellido;
+    }
+
+    public Integer getEdad() {
+        return edad;
+    }
+
+    public void setEdad(Integer edad) {
+        this.edad = edad;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,57 +56,15 @@ public class PersonalEntity {
     private String nombre;
 
     @NotBlank(message = "El primer apellido no puede estar vacio")
-    private String primer_apellido;
+    private String primerApellido; // Antes tenías primer_apellido
 
-    private String segundo_apellido;
-    
+    private String segundoApellido; // Antes tenías segundo_apellido
+
     @NotNull(message = "La edad es obligatoria")
     @Min(value = 0 , message = "La edad minima es 0") 
     private Integer edad;
 
-    public PersonalEntity() {
-    }
-
-    public PersonalEntity(String nombre, String primer_apellido, Integer edad) {
-        this.nombre = nombre;
-        this.primer_apellido = primer_apellido;
-        this.edad = edad;
-    }
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public String getNombre() {
-        return this.nombre;
-    }
-
-    public String getPrimerApellido() {
-        return this.primer_apellido;
-    }
-
-    public String getSegundoApellido() {
-        return this.segundo_apellido;
-    }
-
-    public Integer getEdad() {
-        return this.edad;
-    }
-
-    public void setNombre(String value) {
-        this.nombre = value;
-    }
-
-    public void setPrimerApellido(String value) {
-        this.primer_apellido = value;
-    }
-
-    public void setSegundoApellido(String value) {
-        this.segundo_apellido = value;
-    }
-
-    public void setEdad(Integer value) {
-        this.edad = value;
-    }
+    // Constructor vacío (Obligatorio)
+    public PersonalEntity() {}
 
 }
