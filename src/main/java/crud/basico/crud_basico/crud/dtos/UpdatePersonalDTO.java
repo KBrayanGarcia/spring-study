@@ -1,17 +1,21 @@
-package crud.basico.crud_basico.crud.entities;
+package crud.basico.crud_basico.crud.dtos;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-@Entity
-public class PersonalEntity {
+public class UpdatePersonalDTO {
+    @NotBlank(message = "El nombre es obligatorio")
+    private String nombre;
 
-    public Long getId() {
-        return id;
-    }
+    @NotBlank(message = "El primer apellido es obligatorio")
+    private String primerApellido;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private String segundoApellido; // Sigue siendo opcional
+
+    @NotNull(message = "La edad es obligatoria")
+    @Min(0)
+    private Integer edad;
 
     public String getNombre() {
         return nombre;
@@ -44,17 +48,5 @@ public class PersonalEntity {
     public void setEdad(Integer edad) {
         this.edad = edad;
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nombre;
-    private String primerApellido; // Antes tenías primer_apellido
-    private String segundoApellido; // Antes tenías segundo_apellido
-    private Integer edad;
-
-    // Constructor vacío (Obligatorio)
-    public PersonalEntity() {
-    }
-
+    
 }

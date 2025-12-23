@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import crud.basico.crud_basico.crud.dtos.CreatePersonalDTO;
+import crud.basico.crud_basico.crud.dtos.UpdatePersonalDTO;
 import crud.basico.crud_basico.crud.entities.PersonalEntity;
 import crud.basico.crud_basico.crud.repository.PersonalRepository;
 
@@ -19,8 +21,24 @@ public class PersonalService {
         return this.personalRepository.findAll();
     }
 
-    public PersonalEntity savePersonal(PersonalEntity data) {
-        return this.personalRepository.save(data);
+    public PersonalEntity createPersonal(CreatePersonalDTO data) {
+        PersonalEntity newPersonal = new PersonalEntity();
+        newPersonal.setEdad(data.getEdad());
+        newPersonal.setNombre(data.getNombre());
+        newPersonal.setPrimerApellido(data.getPrimerApellido());
+        return this.personalRepository.save(newPersonal);
+    }
+
+    public PersonalEntity updatePersonal(Long id, UpdatePersonalDTO data) {
+        return personalRepository.findById(id).map(personalToEdit -> {
+            personalToEdit.setNombre(data.getNombre());
+            personalToEdit.setPrimerApellido(data.getPrimerApellido());
+            if (data.getSegundoApellido() != null) {
+                personalToEdit.setSegundoApellido(data.getSegundoApellido());
+            }
+            personalToEdit.setEdad(data.getEdad());
+            return this.personalRepository.save(personalToEdit);
+        }).orElseThrow(() -> new RuntimeException("Error al editar un personal"));
     }
 
 }
