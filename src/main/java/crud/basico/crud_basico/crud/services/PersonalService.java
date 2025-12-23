@@ -41,4 +41,11 @@ public class PersonalService {
         }).orElseThrow(() -> new RuntimeException("Error al editar un personal"));
     }
 
+    public void deletePersonal(Long id) {
+        if (!this.personalRepository.existsById(id)) {
+            throw new RuntimeException("No se encontro el personal con el id" + id);
+        }
+        this.personalRepository.deleteById(id);;
+    }
+
 }

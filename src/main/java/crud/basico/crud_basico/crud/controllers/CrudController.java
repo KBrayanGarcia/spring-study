@@ -2,6 +2,7 @@ package crud.basico.crud_basico.crud.controllers;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +39,11 @@ public class CrudController {
     @PutMapping("/crud/{id}")
     public PersonalEntity updatePersonal(@Valid @RequestBody UpdatePersonalDTO data, @PathVariable Long id) {
         return this.personalService.updatePersonal(id, data);
+    }
+
+    @DeleteMapping("/crud/{id}")
+    public void deletePersonal(@PathVariable Long id) {
+        this.personalService.deletePersonal(id);
     }
 
 }
