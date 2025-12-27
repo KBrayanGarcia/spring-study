@@ -2,12 +2,20 @@ package crud.basico.crud_basico.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.validation.annotation.Validated;
+
+import jakarta.validation.constraints.NotBlank;
 
 @Configuration
 @ConfigurationProperties(prefix = "spring.datasource")
+@Validated
 public class DataSourceConfig {
+    @NotBlank(message = "La URL de la fuente de datos es obligatoria en el .env")
     private String url;
+    @NotBlank(message = "El driver de la fuente de datos es obligatorio en el .env")
     private String driverClassName;
+
+    @NotBlank(message = "El nombre de usuario de la fuente de datos es obligatorio en el .env")
     private String username;
     private String password;
 
